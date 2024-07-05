@@ -17,6 +17,8 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
+    '''Divide column categories into columns for each category'''
+    
     # Create a list of the 36 individual category columns
     row = list(df[df['id']==2]['categories'].str.split(';', expand=True).values[0])
 
@@ -35,11 +37,16 @@ def clean_data(df):
     # Delete original categories column, which is no longer needed
     df.drop(columns='categories', inplace=True)
 
+    df.drop_duplicates(inplace=True)
+    
     return df
     
 
 def save_data(df, database_filename):
-    pass  
+    '''Save dataframe to database'''
+    
+    engine = create_engine(f'sqlite:///{database_filename}')
+    df.to_sql('cat_messages', engine, index=False, if_exists='replace')
 
 
 def main():
