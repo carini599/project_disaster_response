@@ -8,13 +8,13 @@ def load_data(messages_filepath, categories_filepath):
     '''The function loads data from the messages and the categories csv into the dataframes, merges them and return a combined dataframe.'''
     
     # Import CSVs
-    messages = pd.read_csv("messages_filepath")
-    categories = pd.read_csv("categories_filepath")
+    messages = pd.read_csv(messages_filepath)
+    categories = pd.read_csv(categories_filepath)
     
     # Merge messages and categories
     df = messages.merge(categories, on='id', how='inner')
 
-return df
+    return df
 
 def clean_data(df):
     pass
