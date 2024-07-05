@@ -18,7 +18,7 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     # Create a list of the 36 individual category columns
-    row = list(df[categories['id']==2]['categories'].str.split(';', expand=True).values[0])
+    row = list(df[df['id']==2]['categories'].str.split(';', expand=True).values[0])
 
     category_colnames = []
 
