@@ -1,9 +1,20 @@
+# import libraries
 import sys
-
+import pandas as pd
+import numpy as np
+from sqlalchemy import create_engine, text
 
 def load_data(messages_filepath, categories_filepath):
-    pass
+    '''The function loads data from the messages and the categories csv into the dataframes, merges them and return a combined dataframe.'''
+    
+    # Import CSVs
+    messages = pd.read_csv("messages_filepath")
+    categories = pd.read_csv("categories_filepath")
+    
+    # Merge messages and categories
+    df = messages.merge(categories, on='id', how='inner')
 
+return df
 
 def clean_data(df):
     pass
