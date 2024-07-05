@@ -17,8 +17,26 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
-    pass
+    # Create a list of the 36 individual category columns
+    row = list(df[categories['id']==2]['categories'].str.split(';', expand=True).values[0])
 
+    category_colnames = []
+
+    for r in row:
+        category_colnames.append(r.split('-')[0])
+
+    # Split category column into separate category columns
+    df[category_colnames] = df['categories'].str.split(';', expand=True)
+
+    # Loop over all category columns and keep only values behind the '-'
+    for cat in category_colnames:
+        df[cat]=df[cat].str.split('-',n=2,expand=True)[1]
+    
+    # Delete original categories column, which is no longer needed
+    df.drop(columns='categories', inplace=True)
+
+    return df
+    
 
 def save_data(df, database_filename):
     pass  
