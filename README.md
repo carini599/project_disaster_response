@@ -1,8 +1,17 @@
 ### Project Disaster Response Pipeline
 
-## Installation
+## Table of Contents
+1.[Installation](#installation)
+2.[Project Motivation](#motivation)
+3.[File Descriptions](#files)
+4.[Results](#results)
+5.[Licensing, Authors, and Acknowledgements](#licensing)
 
-## Project Motivation
+## Installation <a name="installation"></a>
+
+The code is written using Pythons version 3.11.0. All libraries are available within the Anaconda distribution of Python.
+
+## Project Motivation <a name="motivation"></a>
 
 The project "disaster response pipeline" is part of my nanodegree course in Data Science at Udacity. The program imports csv-files provided by Appen (www.appen.com) with messages during catastrophic events and categorizes them using a ML learning pipeline.
 After importing the csv-files and storing them to a sqlite-database, the data is used to train a machine learning pipeline. The pipeline reads in the tokenized messages and vectorizes them and transforms them using a tfidf-transformer.
@@ -11,7 +20,7 @@ To improve results, GridSearch is used to find the best results for certain para
 
 The model is finally displayed in a flask web app, where the user can enter potential messages which then are classified according to the ML model. 
 
-## File Descriptions
+## File Descriptions <a name="files"></a>
 
 The project is subdivided into three folders. 
 1. data
@@ -39,6 +48,8 @@ The project is subdivided into three folders.
         * go.html
             Classification Results of the entered message.
 
-## Licensing, Authors, Acknowledgements
+## Results <a name="results"></a>
+
+## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 
 I have to thank Appen for providing the data for this exciting project and Udacity for pushing myself to the limits again and again and thereby expanding my horizon enormously.
