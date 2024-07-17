@@ -32,9 +32,12 @@ The project is subdivided into three folders.
         The pickle-file stores the machine learning model, to classify messages.
 3. app
     * run.py
+        The program starts the flask web server, which displays the model and contains the plotly code for the charts on the web app.
     * templates
         * master.html
+            Project Landing Page with several charts and input for classification of a custom sentence.
         * go.html
+            Classification Results of the entered message.
 
 ## Licensing, Authors, Acknowledgements
 
