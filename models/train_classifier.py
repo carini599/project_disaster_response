@@ -27,12 +27,12 @@ def load_data(database_filepath):
     df = pd.read_sql(sql=text('SELECT * FROM cat_messages'), con=engine.connect())
 
     #Create List with category names from columns
-    columns_Y=list(df.columns)[4:]
+    category_names=list(df.columns)[4:]
 
     X = df['message']
-    Y = df[columns_Y]
+    Y = df[category_names]
 
-    return X,Y
+    return X,Y,category_names
 
 
 def tokenize(text):
@@ -54,15 +54,23 @@ def tokenize(text):
 
 def build_model():
     ''' Create pipeline, that vectorizes tokenzized words, 
-    convert it to tfidf and calculates a random forrest model for mulitple outputs '''
+    convert it to tfidf and calculates a random forrest model for mulitple outputs. 
+    Find alternative parameters with GridSearch.'''
     
     model = Pipeline([
     ('vect',CountVectorizer(tokenizer=tokenize)),
     ('tfidf' , TfidfTransformer()),
     ('moc', MultiOutputClassifier(RandomForestClassifier()))
     ])
+    
+    #Model parameters to test with GridSearch
+    parameters = {'moc__estimator__min_samples_leaf':[1,20,50],
+              'moc__estimator__max_leaf_nodes':[100,None]
+             }
+              
+    cv = GridSearchCV(model, param_grid = parameters)
 
-    return model
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):

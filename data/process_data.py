@@ -33,6 +33,7 @@ def clean_data(df):
     # Loop over all category columns and keep only values behind the '-'
     for cat in category_colnames:
         df[cat]=df[cat].str.split('-',n=2,expand=True)[1]
+        df[cat]=df[cat].astype('int')
     
     # Delete original categories column, which is no longer needed
     df.drop(columns='categories', inplace=True)
