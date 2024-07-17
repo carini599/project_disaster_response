@@ -16,17 +16,25 @@ The model is finally displayed in a flask web app, where the user can enter pote
 The project is subdivided into three folders. 
 1. data
     * disaster_categories.csv
+        The file contains the message id and categories.
     * disaster_messages.csv
+        The file contains the message id, message text, the original message and the genre.
     * DisasterResponse.db
+        Data of the csv-files are combined in the table cat_messages.
     * process_data.py
+        The program loads the CSV-files and transforms them and stores the combined data in the table cat_messages of the DisasterResponse.db
 2. models
     * train_classifier.py
+        The program train_classifier.py imports data from the cat_messages table of the sqlite database DisasterResponse.db and creates a machine learning model from it. 
+        Therefore the messages are tokenized, vectorized and tfidf-transformed, before they are used to train a Random Forrest Classifier for multiple outputs.
+        Finally the program exports the model to the classifier.pkl Pickle file.
     * classifier.pkl
+        The pickle-file stores the machine learning model, to classify messages.
 3. app
     * run.py
     * templates
-        ** master.html
-        ** go.html
+        * master.html
+        * go.html
 
 ## Licensing, Authors, Acknowledgements
 
