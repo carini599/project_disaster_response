@@ -10,6 +10,14 @@
 ## Installation <a name="installation"></a>
 
 The code is written using Pythons version 3.11.0. All libraries are available within the Anaconda distribution of Python.
+### Database (ETL)
+To create the database, the python code process_data.py has to be executed from the folder "data". The database created by this code however is also already included in the repository and will just be replaced, when the code is run again.
+
+### Machine Learing Model (NLP-Pipeline)
+The machine learning model can be trained using the code train_classifier.py from the "models" folder. The result is exported into a pickle file (classifier.pkl), which is already prepared in the repository and will just be replaced by executing the code again.
+
+### Web App
+The web app can be started by executing the code run.py from the folder "app". I therefore used a venv. The code then starts the flask server and provides an IP-address where the web app can be used.
 
 ## Project Motivation <a name="motivation"></a>
 
@@ -49,6 +57,9 @@ The project is subdivided into three folders.
             Classification Results of the entered message.
 
 ## Results <a name="results"></a>
+
+Result of the project is a machine learning model, that classifies your own messages in the web app into the categories, which were available in the dataset.
+The web app also shows four charts, which give a first impression about the given data, the model was trained on. 
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 
