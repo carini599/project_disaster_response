@@ -39,26 +39,35 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/index')
 def index():
     
-    # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    # Extract data needed for visuals
+
+    # Genre of messages for Chart No. 1
+    # Count messages by genre and genre names 
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
 
-    categories=list(df.columns)[4:]
+    # Categories of messages for Chart No. 2
+    # Count messages in different categories and ordered category names 
+    categories=list(df.columns)[4:42]
     category_counts=df[categories].sum().sort_values(ascending=False)
     category_names=list(category_counts.index)
 
-    df['number_cat']=df[categories].sum(axis=1)
-    df['number_cat'].value_counts()
+    # Number of Categories per Message for Chart No. 3
+    # Count of Categories per Message and ordered category names 
+    # Create Copy of DataFrame
+    df_num = df[categories]
+    
+    # Insert column with number of categories per message
+    df_num['number_cat']=df[categories].sum(axis=1)
 
-    number_cat_counts = df['number_cat'].value_counts()
+    # Count the number of messages with the same number of categories per message 
+    number_cat_counts = df_num['number_cat'].value_counts()
     number_cat_name = list(number_cat_counts.index)
 
+    # Correlation matrix between categories for Chart No. 4
     corr_mat=df[categories].corr()
-    
-    
-    # create visuals
-    # TODO: Below is an example - modify to create your own visuals
+        
+    # Create visuals
     graphs = [
         #Chart No. 1: Distribution of Message Genres
         {
@@ -134,8 +143,8 @@ def index():
 
             'layout': {
                 'title': 'Chart No. 4: Correlation between Categories',
-                'height': 760,
-                'width': 760,
+                'height': 860,
+                'width': 860,
                 'xaxis': {
                     'automargin': True
                 },
