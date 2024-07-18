@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from plotly.graph_objs import Bar
+from plotly.graph_objs import Bar, Heatmap
 #from sklearn.externals import joblib
 import joblib
 from sqlalchemy import create_engine
@@ -47,6 +47,12 @@ def index():
     categories=list(df.columns)[4:]
     category_counts=df[categories].sum().sort_values(ascending=False)
     category_names=list(category_counts.index)
+
+    df['number_cat']=df[categories].sum(axis=1)
+    df['number_cat'].value_counts()
+
+    number_cat_counts = df['number_cat'].value_counts()
+    number_cat_name = list(number_cat_counts.index)
 
     corr_mat=df[categories].corr()
     
@@ -89,11 +95,57 @@ def index():
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Cartegory"
+                    'title': "Category",
+                    'automargin': True
                 }
             }
         }
-     
+        ,
+        #Chart No. 3: Distribution of Number of Categories per Message
+        {
+            'data': [
+                Bar(
+                    x=number_cat_name,
+                    y=number_cat_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Chart No. 3: Distribution of Number of Categories per Message',
+                'yaxis': {
+                    'title': "Count of Messages"
+                },
+                'xaxis': {
+                    'title': "Number of Selected Categories per Message",
+                    'dtick': 1
+                }
+            }
+        }
+        ,
+        #Chart No. 4: Correlation between Categories
+        {
+            'data': [
+                Heatmap(
+                    x=categories,
+                    y=categories,
+                    z=corr_mat
+                )
+            ],
+
+            'layout': {
+                'title': 'Chart No. 4: Correlation between Categories',
+                'height': 760,
+                'width': 760,
+                'xaxis': {
+                    'automargin': True
+                },
+                'yaxis': {
+                    'automargin': True
+                }
+
+            }
+ 
+        }
         
     ]
     
