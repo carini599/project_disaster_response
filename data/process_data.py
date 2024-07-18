@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, text
 def load_data(messages_filepath, categories_filepath):
     '''The function loads data from the messages and the categories csv into the dataframes, merges them and return a combined dataframe.'''
     
-    # Import CSVs
+    # Import CSVs from messages_filepath
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     
@@ -17,17 +17,19 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
-    '''Divide column categories into columns for each category'''
+    '''Divide column categories into separate columns for each category'''
     
     # Create a list of the 36 individual category columns
-    row = list(df[df['id']==2]['categories'].str.split(';', expand=True).values[0])
-
+    # Take first row of categories column and split it by the seperator ; and convert to list
+    row=df['categories'].iloc[0].split(';')
+    
     category_colnames = []
 
+    # For each element in the list get only the first part before the "-" and append it to category_colnames list.
     for r in row:
         category_colnames.append(r.split('-')[0])
 
-    # Split category column into separate category columns
+    # Split category column values into separate category columns
     df[category_colnames] = df['categories'].str.split(';', expand=True)
 
     # Loop over all category columns and keep only values behind the '-'
@@ -38,15 +40,19 @@ def clean_data(df):
     # Delete original categories column, which is no longer needed
     df.drop(columns='categories', inplace=True)
 
+    # Delete duplicates from the dataset
     df.drop_duplicates(inplace=True)
     
     return df
     
 
 def save_data(df, database_filename):
-    '''Save dataframe to database'''
+    '''Save dataframe df to specified database database_filename'''
     
+    # Create database connection
     engine = create_engine(f'sqlite:///{database_filename}')
+    
+    # Save dataset df to table cat_messages in database
     df.to_sql('cat_messages', engine, index=False, if_exists='replace')
 
 
@@ -54,14 +60,17 @@ def main():
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
-
+        
+        #Loading Data
         print('Loading data...\n    MESSAGES: {}\n    CATEGORIES: {}'
               .format(messages_filepath, categories_filepath))
         df = load_data(messages_filepath, categories_filepath)
 
+        #Cleaning data
         print('Cleaning data...')
         df = clean_data(df)
         
+        #Save data to specified database
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
         save_data(df, database_filepath)
         
