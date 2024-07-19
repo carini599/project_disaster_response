@@ -67,10 +67,10 @@ def build_model():
     ('moc', MultiOutputClassifier(RandomForestClassifier()))
     ])
     
-    #Model parameters to test with GridSearch
+    #Model parameters to test with GridSearch (I commented some of the parameters out to reduce calculation time)
     parameters = {'moc__estimator__n_estimators':[50,100],
-                'moc__estimator__min_samples_split':[2,3],
-              #'moc__estimator__max_leaf_nodes':[10,None]
+                # 'moc__estimator__min_samples_split':[2,3],
+                # 'moc__estimator__max_leaf_nodes':[10,None]
              }
 
     #Use Gridsearch to find the best parameters           
