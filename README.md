@@ -11,10 +11,12 @@
 
 The code is written using Pythons version 3.11.0. All libraries are available within the Anaconda distribution of Python.
 ### Database (ETL)
-To create the database, the python code process_data.py has to be executed from the folder "data". The database created by this code however is also already included in the repository and will just be replaced, when the code is run again.
+To create the database, the python code process_data.py has to be executed from the folder "data". Please specify the csv files and the database (e.g. python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db).
+The database created by this code however is also already included in the repository and will just be replaced, when the code is run again.
 
 ### Machine Learing Model (NLP-Pipeline)
-The machine learning model can be trained using the code train_classifier.py from the "models" folder. The result is exported into a pickle file (classifier.pkl), which is already prepared in the repository and will just be replaced by executing the code again.
+The machine learning model can be trained using the code train_classifier.py from the "models" folder. Start the code by specifying the database and the file for the model (e.g. python train_classifier.py ../data/DisasterResponse.db classifier.pkl).
+The result is exported into a pickle file (classifier.pkl), which is already prepared in the repository and will just be replaced by executing the code again.
 
 ### Web App
 The web app can be started by executing the code run.py from the folder "app". I therefore used a venv. The code then starts the flask server and provides an IP-address where the web app can be used.
