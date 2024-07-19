@@ -69,7 +69,8 @@ def build_model():
     
     #Model parameters to test with GridSearch
     parameters = {'moc__estimator__n_estimators':[50,100],
-              'moc__estimator__max_leaf_nodes':[10,None]
+                'moc__estimator__min_samples_split':[2,3],
+              #'moc__estimator__max_leaf_nodes':[10,None]
              }
 
     #Use Gridsearch to find the best parameters           
@@ -93,7 +94,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 def save_model(model, model_filepath):
     '''The function saves model to pickle file.'''
-    
+
     pickle.dump(model, open(model_filepath,'wb'))
 
 
