@@ -15,7 +15,7 @@ To create the database, the python code process_data.py has to be executed from 
 The database created by this code however is also already included in the repository and will just be replaced, when the code is run again.
 
 ### Machine Learing Model (NLP-Pipeline)
-The machine learning model can be trained using the code train_classifier.py from the "models" folder. Start the code by specifying the database and the file for the model (e.g. python train_classifier.py ../data/DisasterResponse.db classifier.pkl).
+The machine learning model can be trained using the code train_classifier.py from the "models" folder. Start the code by specifying the database and the file for the model (e .g. python train_classifier.py ../data/DisasterResponse.db classifier.pkl).
 The result is exported into a pickle file (classifier.pkl), which is already prepared in the repository and will just be replaced by executing the code again.
 
 ### Web App
@@ -46,7 +46,7 @@ The project is subdivided into three folders.
     * train_classifier.py:
         The program train_classifier.py imports data from the cat_messages table of the sqlite database DisasterResponse.db and creates a machine learning model from it. 
         Therefore the messages are tokenized, vectorized and tfidf-transformed, before they are used to train a Random Forrest Classifier for multiple outputs.
-        Finally the program exports the model to the classifier.pkl Pickle file.
+        Finally the program exports the model to the classifier.pkl pickle file.
     * classifier.pkl:
         The pickle-file stores the machine learning model, to classify messages.
 3. app
