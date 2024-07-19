@@ -18,6 +18,9 @@ from sklearn.model_selection import GridSearchCV
 import pickle
 
 def load_data(database_filepath):
+    '''Function loads data from database table cat_messages into dataset df and splits it 
+    into dependent and independent variables Y and X and extracts categories from column names.
+    It returns X,Y and a list of category names.'''
     
     #sqllite engine file path
     path = f'sqlite:///{database_filepath}'
@@ -54,9 +57,10 @@ def tokenize(text):
 
 def build_model():
     ''' Create pipeline, that vectorizes tokenzized words, 
-    convert it to tfidf and calculates a random forrest model for mulitple outputs. 
-    Find alternative parameters with GridSearch.'''
+    convert it using a tfidftransformer and calculates a random forest model for mulitple outputs. 
+    It tests multiple alternative parameters with GridSearch and returns the model, with the best offered parameters.'''
     
+    # Build model pipeline
     model = Pipeline([
     ('vect',CountVectorizer(tokenizer=tokenize)),
     ('tfidf' , TfidfTransformer()),
@@ -64,16 +68,18 @@ def build_model():
     ])
     
     #Model parameters to test with GridSearch
-    parameters = {'moc__estimator__min_samples_leaf':[1,20,50],
-              'moc__estimator__max_leaf_nodes':[100,None]
+    parameters = {'moc__estimator__n_estimators':[50,100],
+              'moc__estimator__max_leaf_nodes':[10,None]
              }
-              
+
+    #Use Gridsearch to find the best parameters           
     cv = GridSearchCV(model, param_grid = parameters)
 
     return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    "The function evaluates the model by printing classification reports for each category"
 
     # Predict values for test data
     Y_pred = pd.DataFrame(model.predict(X_test))
@@ -86,6 +92,8 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    '''The function saves model to pickle file.'''
+    
     pickle.dump(model, open(model_filepath,'wb'))
 
 
