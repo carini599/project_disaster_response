@@ -1,4 +1,4 @@
-data\categories.csv
-data\messages.csv
-app\test_notebook.ipynb
-models\classifier.pkl
+data/categories.csv
+data/messages.csv
+app/test_notebook.ipynb
+models/classifier.pkl
