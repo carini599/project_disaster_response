@@ -16,7 +16,7 @@ The database created by this code however is also already included in the reposi
 
 ### Machine Learing Model (NLP-Pipeline)
 The machine learning model can be trained using the code train_classifier.py from the "models" folder. Start the code by specifying the database and the file for the model (e .g. python train_classifier.py ../data/DisasterResponse.db classifier.pkl).
-The result is exported into a pickle file (classifier.pkl), which is already prepared in the repository and will just be replaced by executing the code again.
+The result is exported into a pickle file (classifier.pkl).
 
 ### Web App
 The web app can be started by executing the code run.py from the folder "app". I therefore used a venv. The code then starts the flask server and provides an IP-address where the web app can be used.
