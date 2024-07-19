@@ -1,6 +1,4 @@
-categories.csv
-messages.csv
-project_materials
-project_materials.tar
-Project
-DisasterResponse.db
+data\categories.csv
+data\messages.csv
+app\test_notebook.ipynb
+models\classifier.pkl
