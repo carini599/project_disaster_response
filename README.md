@@ -62,6 +62,9 @@ The project is subdivided into three folders.
 
 Result of the project is a machine learning model, that classifies your own messages in the web app into the categories, which were available in the dataset.
 The web app also shows four charts, which give a first impression about the given data, the model was trained on. 
+![Screenshot No. 1](./impressions/screenshot_app_1.jpg)
+![Screenshot No. 2](./impressions/screenshot_app_2.jpg)
+![Screenshot No. 3](./impressions/screenshot_app_3.jpg)
 
 ## Licensing, Authors, Acknowledgements <a name="licensing"></a>
 
